@@ -1,0 +1,17 @@
+[package]
+name = "iracing_tracks_fetcher"
+version = "0.1.0"
+authors = ["brandonjjon <tiny.pen1987@fastmail.com>"]
+edition = "2018"
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json", "cookies"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.9"
+base64 = "0.13"
+dotenv = "0.15"
+chrono = "0.4"
+csv = "1.1"
+config = "0.13"
