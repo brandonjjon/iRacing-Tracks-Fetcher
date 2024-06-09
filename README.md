@@ -14,16 +14,16 @@ This Rust script authenticates with the iRacing API and fetches track informatio
 
 Download the appropriate executable for your operating system from the [releases page](https://github.com/brandonjjon/iracing-tracks-fetcher/releases).
 
-### Step 2: Setup Environment Variables
+### Step 2: Setup Environment Variables (Optional)
 
-Create a `.env` file in the same directory as the executable with the following content:
+This step is optional as the script will prompt you for credentials if they don't already exist. If you run it on a regular basis, you may want to create a `.env` file in the same directory as the executable with the following content:
 
 ```env
 IRACING_EMAIL=your_email@domain.com
 IRACING_PASSWORD=your_password
 ```
 
-Alternatively, you can set these environment variables directly in your system.
+The script will run now run immediately instead of prompting you each time. Alternatively, you can set these environment variables directly in your system.
 
 ### Step 3: Run the Executable
 
