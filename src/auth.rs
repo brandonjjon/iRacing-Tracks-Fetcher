@@ -2,9 +2,7 @@ use reqwest::Client;
 use sha2::{Digest, Sha256};
 use std::error::Error;
 
-const API_URL: &str = "https://members-ng.iracing.com";
-
-pub async fn authenticate(client: &Client, email: &str, password: &str) -> Result<String, Box<dyn Error>> {
+pub async fn authenticate(client: &Client, email: &str, password: &str, api_url: &str) -> Result<String, Box<dyn Error>> {
     let normalized_email = email.to_lowercase();
     let mut hasher = Sha256::new();
     hasher.update(format!("{}{}", password, normalized_email));
@@ -16,7 +14,7 @@ pub async fn authenticate(client: &Client, email: &str, password: &str) -> Resul
     });
 
     let res = client
-        .post(format!("{}/auth", API_URL))
+        .post(format!("{}/auth", api_url))
         .json(&auth_body)
         .send()
         .await?;

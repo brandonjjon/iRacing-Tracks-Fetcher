@@ -27,11 +27,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let settings = Settings::new();
     let client = reqwest::Client::new();
 
-    // Ensure the output directory exists
     utils::ensure_output_directory(&settings.output_dir)?;
 
-    // Authenticate and get the cookie
-    let cookie = match auth::authenticate(&client, &settings.email, &settings.password).await {
+    let cookie = match auth::authenticate(&client, &settings.email, &settings.password, &settings.api_url).await {
         Ok(cookie) => cookie,
         Err(e) => {
             eprintln!("Error during authentication: {}", e);
@@ -39,10 +37,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
 
-    // Fetch tracks using the authenticated session
-    match tracks::fetch_tracks(&client, &cookie).await {
+    match tracks::fetch_tracks(&client, &cookie, &settings.api_url).await {
         Ok(tracks) => {
-            // Write the tracks to a CSV file
             if let Err(e) = utils::write_tracks_to_csv(tracks, &settings.output_dir) {
                 eprintln!("Error writing to CSV: {}", e);
             } else {

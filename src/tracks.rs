@@ -2,8 +2,6 @@ use reqwest::Client;
 use serde::Deserialize;
 use std::error::Error;
 
-const API_URL: &str = "https://members-ng.iracing.com";
-
 #[derive(Deserialize, Debug)]
 pub struct Track {
     pub track_id: i32,
@@ -19,10 +17,10 @@ struct InitialResponse {
     link: String,
 }
 
-pub async fn fetch_tracks(client: &Client, cookie: &str) -> Result<Vec<Track>, Box<dyn Error>> {
+pub async fn fetch_tracks(client: &Client, cookie: &str, api_url: &str) -> Result<Vec<Track>, Box<dyn Error>> {
     // First request to get the link
     let response = client
-        .get(format!("{}/data/track/get", API_URL))
+        .get(format!("{}/data/track/get", api_url))
         .header(reqwest::header::COOKIE, cookie)
         .send()
         .await?;
