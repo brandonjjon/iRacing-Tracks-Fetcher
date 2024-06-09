@@ -46,7 +46,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             if let Err(e) = utils::write_tracks_to_csv(tracks, &settings.output_dir) {
                 eprintln!("Error writing to CSV: {}", e);
             } else {
-                println!("Tracks written to the output directory");
+                println!("Finished");
             }
         }
         Err(e) => {
